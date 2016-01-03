@@ -1,12 +1,13 @@
 'use strict'
 
-let fs       = require('fs'),
-    async    = require('async'),
-    babel    = require('./lib/babel'),
-    uglifyjs = require('./lib/uglifyjs')
+let fs         = require('fs'),
+    async      = require('async'),
+    browserify = require('./lib/browserify'),
+    uglifyjs   = require('./lib/uglifyjs')
 
 /*
  * Load, transform and compress JS.
+ * @public
  * @param {string} filePath - Absolute path to the requested file.
  * @param {string} srcPath - Absolute path to the source folder.
  * @param {string} distPath - Absolute path to the export folder.
@@ -19,8 +20,7 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 
 	async.waterfall([
 
-		(next)      => fs.readFile(filePath, 'utf8', next),
-		(str, next) => babel(str, next),
+		(next)      => browserify(filePath, next),
 		(str, next) => uglifyjs(str, next)
 
 	], (err, str) => {

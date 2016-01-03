@@ -1,10 +1,10 @@
 {
   "name": "rosid-handler-js",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "authors": [
     "Tobias Reich <tobias@electerious.com>"
   ],
-  "description": "Load, transform and compress JS.",
+  "description": "Load, transform, bundle and compress JS.",
   "main": "index.js",
   "keywords": [
     "rosid",
@@ -13,6 +13,7 @@
     "compile",
     "js",
     "babel",
+    "browserify",
     "uglifyjs"
   ],
   "license": "MIT",
@@ -23,8 +24,10 @@
   },
   "dependencies": {
     "async": "^1.5.0",
-    "babel-core": "^6.3.26",
     "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
     "uglify-js": "^2.6.1"
   }
 }
