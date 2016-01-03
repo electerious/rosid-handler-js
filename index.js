@@ -6,7 +6,7 @@ let fs         = require('fs'),
     uglifyjs   = require('./lib/uglifyjs')
 
 /*
- * Load, transform and compress JS.
+ * Load, transform, bundle and compress JS.
  * @public
  * @param {string} filePath - Absolute path to the requested file.
  * @param {string} srcPath - Absolute path to the source folder.
