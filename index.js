@@ -1,9 +1,9 @@
 'use strict'
 
-let fs         = require('fs'),
-    async      = require('async'),
-    browserify = require('./lib/browserify'),
-    uglifyjs   = require('./lib/uglifyjs')
+let fs         = require('fs')
+let async      = require('async')
+let browserify = require('./lib/browserify')
+let uglifyjs   = require('./lib/uglifyjs')
 
 /*
  * Load, transform, bundle and compress JS.
