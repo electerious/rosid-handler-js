@@ -18,10 +18,13 @@ module.exports = function(filePath, srcPath, distPath, route, next) {
 
 	let savePath = filePath.replace(srcPath, distPath)
 
+	let optimize = (distPath==null ? false : true)
+	let opts     = { optimize }
+
 	async.waterfall([
 
-		(next)      => browserify(filePath, next),
-		(str, next) => uglifyjs(str, next)
+		(next)      => browserify(filePath, opts, next),
+		(str, next) => uglifyjs(str, opts, next)
 
 	], (err, str) => {
 
