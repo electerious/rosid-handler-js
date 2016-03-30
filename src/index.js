@@ -2,8 +2,8 @@
 
 let fs         = require('fs')
 let async      = require('async')
-let browserify = require('./lib/browserify')
-let uglifyjs   = require('./lib/uglifyjs')
+let browserify = require('./browserify')
+let uglifyjs   = require('./uglifyjs')
 
 /*
  * Load, transform, bundle and compress JS.
