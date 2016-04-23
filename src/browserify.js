@@ -1,6 +1,6 @@
 'use strict'
 
-let browserify = require('browserify')
+const browserify = require('browserify')
 
 /*
  * Transform JS with Babel and bundle it using Browserify.

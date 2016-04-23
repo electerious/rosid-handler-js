@@ -1,6 +1,6 @@
 'use strict'
 
-let uglifyjs = require('uglify-js')
+const uglifyjs = require('uglify-js')
 
 /*
  * Compress JS using UglifyJS.
@@ -19,7 +19,7 @@ module.exports = function(str, opts, next) {
 
 	try {
 
-		let result = uglifyjs.minify(str, {
+		const result = uglifyjs.minify(str, {
 			fromString: true
 		})
 

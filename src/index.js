@@ -1,9 +1,9 @@
 'use strict'
 
-let fs         = require('fs')
-let async      = require('async')
-let browserify = require('./browserify')
-let uglifyjs   = require('./uglifyjs')
+const fs         = require('fs')
+const async      = require('async')
+const browserify = require('./browserify')
+const uglifyjs   = require('./uglifyjs')
 
 /*
  * Load, transform, bundle and compress JS.
@@ -16,10 +16,10 @@ let uglifyjs   = require('./uglifyjs')
  */
 module.exports = function(filePath, srcPath, distPath, route, next) {
 
-	let savePath = filePath.replace(srcPath, distPath)
+	const savePath = filePath.replace(srcPath, distPath)
 
-	let optimize = (distPath==null ? false : true)
-	let opts     = { optimize }
+	const optimize = (distPath==null ? false : true)
+	const opts     = { optimize }
 
 	async.waterfall([
 
