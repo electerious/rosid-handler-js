@@ -6,27 +6,27 @@ const browserify = require('browserify')
  * Transform JS with Babel and bundle it using Browserify.
  * @public
  * @param {string} filePath - Path to the JS file.
- * @param {Object} opts - Options for the task.
- * @param {function} next - The callback that handles the response. Receives the following properties: err, js.
+ * @param {?Object} opts - Options for the task.
  */
-module.exports = function(filePath, opts, next) {
+module.exports = function(filePath, opts) {
 
-	browserify(filePath, {
+	return new Promise((resolve, reject) => {
 
-		debug: true
+		browserify(filePath, {
 
-	}).transform('babelify', {
+			debug: true
 
-		presets: [ 'es2015', 'react' ]
+		}).transform('babelify', {
 
-	}).bundle((err, result) => {
+			presets: [ 'es2015', 'react' ]
 
-		if (err!=null) {
-			next(err, null)
-			return false
-		}
+		}).bundle((err, result) => {
 
-		next(null, result.toString())
+			if (err!=null) return reject(err)
+
+			return resolve(result.toString())
+
+		})
 
 	})
 

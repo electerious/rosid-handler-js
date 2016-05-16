@@ -1,7 +1,5 @@
 'use strict'
 
-const fs         = require('fs')
-const async      = require('async')
 const browserify = require('./browserify')
 const uglifyjs   = require('./uglifyjs')
 
@@ -16,26 +14,38 @@ const uglifyjs   = require('./uglifyjs')
  */
 module.exports = function(filePath, srcPath, distPath, route, next) {
 
-	const savePath = filePath.replace(srcPath, distPath)
+	let savePath = null
 
 	const optimize = (distPath==null ? false : true)
 	const opts     = { optimize }
 
-	async.waterfall([
+	Promise.resolve().then(() => {
 
-		(next)      => browserify(filePath, opts, next),
-		(str, next) => uglifyjs(str, opts, next)
+		// Prepare file paths
 
-	], (err, str) => {
+		savePath = filePath.replace(srcPath, distPath)
 
-		if (err!=null) {
-			next(err, null, null)
-			return false
-		}
+	}).then(() => {
 
-		next(null, str, savePath)
+		// Process data with browserify
 
-	})
+		return browserify(filePath, opts)
+
+	}).then((str) => {
+
+		// Process data with uglifyjs
+
+		return uglifyjs(str, opts)
+
+	}).then(
+
+		// Return processed data and catch errors
+		// Avoid .catch as we don't want to catch errors of the callback
+
+		(str) => next(null, str, savePath),
+		(err) => next(err, null, null)
+
+	)
 
 }
 
