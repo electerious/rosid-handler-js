@@ -5,7 +5,7 @@ const browserify = require('browserify')
 /*
  * Transform JS with Babel and bundle it using Browserify.
  * @public
- * @param {string} filePath - Path to the JS file.
+ * @param {String} filePath - Path to the JS file.
  * @param {?Object} opts - Options for the task.
  */
 module.exports = function(filePath, opts) {

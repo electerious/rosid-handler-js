@@ -5,7 +5,7 @@ const uglifyjs = require('uglify-js')
 /*
  * Compress JS using UglifyJS.
  * @public
- * @param {?string} str - JS.
+ * @param {?String} str - JS.
  * @param {?Object} opts - Options for the task.
  */
 module.exports = function(str, opts) {
