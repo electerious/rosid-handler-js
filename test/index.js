@@ -29,67 +29,67 @@ describe('index()', function() {
 
 	})
 
-	it('should return an error when called with a invalid filePath', function(done) {
+	it('should return an error when called with a invalid filePath', function() {
 
-		index(null, '/src', '/dist', null, (err, str, savePath) => {
+		return index(null, '/src', '/dist', null).then(({ data, savePath }) => {
+
+			throw new Error('Returned without error')
+
+		}, (err) => {
 
 			assert.isNotNull(err)
-
-			done()
 
 		})
 
 	})
 
-	it('should return an error when called with a fictive filePath', function(done) {
+	it('should return an error when called with a fictive filePath', function() {
 
-		index('test.js', '/src', '/dist', null, (err, str, savePath) => {
+		return index('test.js', '/src', '/dist', null).then(({ data, savePath }) => {
+
+			throw new Error('Returned without error')
+
+		}, (err) => {
 
 			assert.isNotNull(err)
-
-			done()
 
 		})
 
 	})
 
-	it('should return an error when called with an invalid JS file and everything else specified', function(done) {
+	it('should return an error when called with an invalid JS file and everything else specified', function() {
 
-		index(invalidFile.path, '/src', '/dist', null, (err, str, savePath) => {
+		return index(invalidFile.path, '/src', '/dist', null).then(({ data, savePath }) => {
+
+			throw new Error('Returned without error')
+
+		}, (err) => {
 
 			assert.isNotNull(err)
-
-			done()
 
 		})
 
 	})
 
-	it('should load JS and transform it to JS when everything specified', function(done) {
+	it('should load JS and transform it to JS when everything specified', function() {
 
-		index(validFile.path, '/src', '/dist', null, (err, str, savePath) => {
+		return index(validFile.path, '/src', '/dist', null).then(({ data, savePath }) => {
 
-			assert.isNull(err)
-			assert.isString(str)
+			assert.isString(data)
 			assert.isString(savePath)
 			assert.strictEqual(savePath.substr(-3), '.js')
 
-			done()
-
 		})
 
 	})
 
-	it('should load JS and transform it to JS when distPath not specified', function(done) {
+	it('should load JS and transform it to JS when distPath not specified', function() {
 
-		index(validFile.path, '/src', null, null, (err, str, savePath) => {
+		return index(validFile.path, '/src', null, null).then(({ data, savePath }) => {
 
-			assert.isNull(err)
-			assert.isString(str)
+			assert.isString(data)
 			assert.isString(savePath)
 			assert.strictEqual(savePath.substr(-3), '.js')
-
-			done()
 
 		})
 
