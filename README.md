@@ -27,6 +27,6 @@ js('/src/main.js', '/src', '/dist', {}).then(({ data, savePath }) => {})
 
 ## Returns
 
-- `{Promise}`
-	- `result` `{String | Buffer}` The transformed file content.
+- `{Promise}({Object})`
+	- `data` `{String | Buffer}` The transformed file content.
 	- `savePath` `{?String}` Where to save the file when compiling.
