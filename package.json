@@ -17,7 +17,7 @@
     "uglifyjs"
   ],
   "license": "MIT",
-  "homepage": "http://github.com/electerious/rosid-handler-js",
+  "homepage": "https://github.com/electerious/rosid-handler-js",
   "repository": {
     "type": "git",
     "url": "https://github.com/electerious/rosid-handler-js.git"
