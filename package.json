@@ -4,7 +4,7 @@
   "authors": [
     "Tobias Reich <tobias@electerious.com>"
   ],
-  "description": "Load, transform, bundle and compress JS.",
+  "description": "Load, transform, bundle and compress JS",
   "main": "src/index.js",
   "keywords": [
     "rosid",
