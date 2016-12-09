@@ -18,7 +18,7 @@ module.exports = function(filePath, opts) {
 
 		}).transform('babelify', {
 
-			presets: [ 'es2015', 'react' ]
+			presets: [ 'latest', 'react' ]
 
 		}).bundle((err, result) => {
 
