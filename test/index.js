@@ -31,7 +31,7 @@ describe('index()', function() {
 
 	it('should return an error when called with a invalid filePath', function() {
 
-		return index(null, '/src', '/dist', null).then(({ data, savePath }) => {
+		return index(null, '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			throw new Error('Returned without error')
 
@@ -45,7 +45,7 @@ describe('index()', function() {
 
 	it('should return an error when called with a fictive filePath', function() {
 
-		return index('test.js', '/src', '/dist', null).then(({ data, savePath }) => {
+		return index('test.js', '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			throw new Error('Returned without error')
 
@@ -59,7 +59,7 @@ describe('index()', function() {
 
 	it('should return an error when called with an invalid JS file and everything else specified', function() {
 
-		return index(invalidFile.path, '/src', '/dist', null).then(({ data, savePath }) => {
+		return index(invalidFile.path, '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			throw new Error('Returned without error')
 
@@ -73,7 +73,7 @@ describe('index()', function() {
 
 	it('should load JS and transform it to JS when everything specified', function() {
 
-		return index(validFile.path, '/src', '/dist', null).then(({ data, savePath }) => {
+		return index(validFile.path, '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			assert.isString(data)
 			assert.isString(savePath)
@@ -85,7 +85,7 @@ describe('index()', function() {
 
 	it('should load JS and transform it to JS when distPath not specified', function() {
 
-		return index(validFile.path, '/src', null, null).then(({ data, savePath }) => {
+		return index(validFile.path, '/src', null, {}).then(({ data, savePath }) => {
 
 			assert.isString(data)
 			assert.isString(savePath)
