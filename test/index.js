@@ -6,28 +6,21 @@ const assert = require('chai').assert
 const temp   = require('temp').track()
 const index  = require('./../src/index')
 
-let validFile   = null
-let invalidFile = null
+const newFile = function(content, suffix) {
+
+	// File must be in current dir so babel-register can load the plugins and presents
+	const file = temp.openSync({
+		dir    : __dirname,
+		suffix : suffix
+	})
+
+	fs.writeFileSync(file.path, content)
+
+	return file
+
+}
 
 describe('index()', function() {
-
-	before(function() {
-
-		validFile = temp.openSync({
-			dir    : __dirname,
-			suffix : '.js'
-		})
-
-		fs.writeFileSync(validFile.path, `const fn = () => {}`)
-
-		invalidFile = temp.openSync({
-			dir    : __dirname,
-			suffix : '.js'
-		})
-
-		fs.writeFileSync(invalidFile.path, `=`)
-
-	})
 
 	it('should return an error when called with a invalid filePath', function() {
 
@@ -59,7 +52,9 @@ describe('index()', function() {
 
 	it('should return an error when called with an invalid JS file and everything else specified', function() {
 
-		return index(invalidFile.path, '/src', '/dist', {}).then(({ data, savePath }) => {
+		const file = newFile('=', '.js')
+
+		return index(file.path, '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			throw new Error('Returned without error')
 
@@ -73,7 +68,9 @@ describe('index()', function() {
 
 	it('should load JS and transform it to JS when everything specified', function() {
 
-		return index(validFile.path, '/src', '/dist', {}).then(({ data, savePath }) => {
+		const file = newFile('const fn = () => {}', '.js')
+
+		return index(file.path, '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			assert.isString(data)
 			assert.isString(savePath)
@@ -85,7 +82,9 @@ describe('index()', function() {
 
 	it('should load JS and transform it to JS when distPath not specified', function() {
 
-		return index(validFile.path, '/src', null, {}).then(({ data, savePath }) => {
+		const file = newFile('const fn = () => {}', '.js')
+
+		return index(file.path, '/src', null, {}).then(({ data, savePath }) => {
 
 			assert.isString(data)
 			assert.isString(savePath)
