@@ -18,6 +18,29 @@ const js = require('rosid-handler-js')
 js('/src/main.js', '/src', '/dist', {}).then(({ data, savePath }) => {})
 ```
 
+## Example
+
+Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid#routes). `rosid-handler-js` will transform, bundles and compresses all matching JS files in your source folder.
+
+```json
+{
+  "name"    : "JS",
+  "path"    : "[^_]*.js",
+  "handler" : "rosid-handler-js"
+}
+```
+
+```js
+// main.js
+export default () => 'Hello World'
+```
+
+```js
+// main.js (output)
+"use strict"
+Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]=function(){return"Hello World"}
+```
+
 ## Parameters
 
 - `filePath` `{String}` Absolute path to the requested file.
