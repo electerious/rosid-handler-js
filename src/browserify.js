@@ -1,6 +1,8 @@
 'use strict'
 
 const browserify = require('browserify')
+const babelify   = require('babelify')
+const envify     = require('loose-envify/custom')
 
 /*
  * Transform JS with Babel and bundle it using Browserify.
@@ -10,17 +12,23 @@ const browserify = require('browserify')
  */
 module.exports = function(filePath, opts) {
 
+	const env = (opts!=null && opts.optimize===true) ? { NODE_ENV: 'production' } : {}
+
 	return new Promise((resolve, reject) => {
 
 		browserify(filePath, {
 
 			debug: true
 
-		}).transform('babelify', {
+		}).transform(babelify, {
 
 			presets: [ 'latest', 'react' ]
 
-		}).bundle((err, result) => {
+		}).transform(envify(
+
+			env
+
+		)).bundle((err, result) => {
 
 			if (err!=null) return reject(err)
 

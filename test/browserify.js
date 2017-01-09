@@ -1,5 +1,6 @@
 'use strict'
 
+const crypto     = require('crypto')
 const fs         = require('fs')
 const assert     = require('chai').assert
 const temp       = require('temp').track()
@@ -12,13 +13,15 @@ describe('browserify()', function() {
 
 	before(function() {
 
+		// Create file in __dirname so Babel can load its presets
 		validFile = temp.openSync({
 			dir    : __dirname,
 			suffix : '.js'
 		})
 
-		fs.writeFileSync(validFile.path, `const fn = () => {}`)
+		fs.writeFileSync(validFile.path, `const fn = () => process.env.NODE_ENV`)
 
+		// Create file in __dirname so Babel can load its presets
 		invalidFile = temp.openSync({
 			dir    : __dirname,
 			suffix : '.js'
@@ -57,6 +60,26 @@ describe('browserify()', function() {
 		return browserify(validFile.path, null).then((result) => {
 
 			assert.isString(result)
+
+		})
+
+	})
+
+	it('should return JS and replace process.env.NODE_ENV when optimize is true', function() {
+
+		return browserify(validFile.path, { optimize: true }).then((result) => {
+
+			assert.include(result, 'production')
+
+		})
+
+	})
+
+	it('should return JS and not replace process.env.NODE_ENV when optimize is false', function() {
+
+		return browserify(validFile.path, { optimize: false }).then((result) => {
+
+			assert.notInclude(result, 'production')
 
 		})
 
