@@ -24,11 +24,11 @@ module.exports = function(filePath, opts) {
 
 			presets: [ 'latest', 'react' ]
 
-		}).transform(envify(
+		}).transform(envify(env, {
 
-			env
+			global: true
 
-		)).bundle((err, result) => {
+		})).bundle((err, result) => {
 
 			if (err!=null) return reject(err)
 
