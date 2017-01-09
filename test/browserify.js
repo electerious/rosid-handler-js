@@ -79,7 +79,7 @@ describe('browserify()', function() {
 
 		return browserify(validFile.path, { optimize: false }).then((result) => {
 
-			assert.notInclude(result, 'production')
+			assert.include(result, 'process.env.NODE_ENV')
 
 		})
 
