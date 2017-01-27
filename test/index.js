@@ -16,7 +16,7 @@ const newFile = function(content, suffix) {
 
 	fs.writeFileSync(file.path, content)
 
-	return file
+	return file.path
 
 }
 
@@ -54,7 +54,7 @@ describe('index()', function() {
 
 		const file = newFile('=', '.js')
 
-		return index(file.path, '/src', '/dist', {}).then(({ data, savePath }) => {
+		return index(file, '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			throw new Error('Returned without error')
 
@@ -70,7 +70,7 @@ describe('index()', function() {
 
 		const file = newFile('const fn = () => {}', '.js')
 
-		return index(file.path, '/src', '/dist', {}).then(({ data, savePath }) => {
+		return index(file, '/src', '/dist', {}).then(({ data, savePath }) => {
 
 			assert.isString(data)
 			assert.isString(savePath)
@@ -84,7 +84,7 @@ describe('index()', function() {
 
 		const file = newFile('const fn = () => {}', '.js')
 
-		return index(file.path, '/src', null, {}).then(({ data, savePath }) => {
+		return index(file, '/src', null, {}).then(({ data, savePath }) => {
 
 			assert.isString(data)
 			assert.isString(savePath)
