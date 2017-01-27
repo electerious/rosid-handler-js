@@ -6,30 +6,21 @@ const assert     = require('chai').assert
 const temp       = require('temp').track()
 const browserify = require('./../src/browserify')
 
-let validFile   = null
-let invalidFile = null
+const newFile = function(content, suffix) {
+
+	// Create file in __dirname so Babel can load its presets
+	const file = temp.openSync({
+		dir    : __dirname,
+		suffix : suffix
+	})
+
+	fs.writeFileSync(file.path, content)
+
+	return file.path
+
+}
 
 describe('browserify()', function() {
-
-	before(function() {
-
-		// Create file in __dirname so Babel can load its presets
-		validFile = temp.openSync({
-			dir    : __dirname,
-			suffix : '.js'
-		})
-
-		fs.writeFileSync(validFile.path, `const fn = () => process.env.NODE_ENV`)
-
-		// Create file in __dirname so Babel can load its presets
-		invalidFile = temp.openSync({
-			dir    : __dirname,
-			suffix : '.js'
-		})
-
-		fs.writeFileSync(invalidFile.path, `=`)
-
-	})
 
 	it('should return an error when called with a fictive filePath', function() {
 
@@ -57,7 +48,9 @@ describe('browserify()', function() {
 
 	it('should return JS when called with a valid JS file', function() {
 
-		return browserify(validFile.path, null).then((result) => {
+		const file = newFile(`const fn = () => process.env.NODE_ENV`, '.js')
+
+		return browserify(file, null).then((result) => {
 
 			assert.isString(result)
 
@@ -67,7 +60,9 @@ describe('browserify()', function() {
 
 	it('should return JS and replace process.env.NODE_ENV when optimize is true', function() {
 
-		return browserify(validFile.path, { optimize: true }).then((result) => {
+		const file = newFile(`const fn = () => process.env.NODE_ENV`, '.js')
+
+		return browserify(file, { optimize: true }).then((result) => {
 
 			assert.include(result, 'production')
 
@@ -77,7 +72,9 @@ describe('browserify()', function() {
 
 	it('should return JS and not replace process.env.NODE_ENV when optimize is false', function() {
 
-		return browserify(validFile.path, { optimize: false }).then((result) => {
+		const file = newFile(`const fn = () => process.env.NODE_ENV`, '.js')
+
+		return browserify(file, { optimize: false }).then((result) => {
 
 			assert.include(result, 'process.env.NODE_ENV')
 
@@ -87,7 +84,9 @@ describe('browserify()', function() {
 
 	it('should return an error when called with an invalid JS file', function() {
 
-		return browserify(invalidFile.path, null).then((result) => {
+		const file = newFile(`=`, '.js')
+
+		return browserify(file, null).then((result) => {
 
 			throw new Error('Returned without error')
 
