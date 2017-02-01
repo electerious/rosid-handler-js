@@ -50,4 +50,4 @@ Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]=functi
 
 ## Returns
 
-- `{Promise}({String | Buffer})` The transformed file content.
+- `{Promise}({String|Buffer})` The transformed file content.
