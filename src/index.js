@@ -15,7 +15,7 @@ module.exports = function(filePath, opts) {
 	return Promise.resolve().then(() => {
 
 		if (typeof filePath!=='string')           throw new Error(`'filePath' must be a string`)
-		if (typeof opts!=='object' && opts!=null) throw new Error(`'opts' must be undefined or an object`)
+		if (typeof opts!=='object' && opts!=null) throw new Error(`'opts' must be undefined, null or an object`)
 
 	}).then((str) => {
 
