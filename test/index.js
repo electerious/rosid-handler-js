@@ -24,7 +24,7 @@ describe('index()', function() {
 
 	it('should return an error when called without a filePath', function() {
 
-		return index(null).then((data) => {
+		return index().then((data) => {
 
 			throw new Error('Returned without error')
 
