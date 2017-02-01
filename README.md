@@ -15,10 +15,11 @@ npm install rosid-handler-js
 ```js
 const js = require('rosid-handler-js')
 
-js('/src/main.js', '/src', '/dist', {}).then(({ data, savePath }) => {})
+js('/src/main.js').then((data) => {})
+js('/src/main.js', { optimize: true }).then((data) => {})
 ```
 
-## Example
+## Rosid
 
 Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid#routes). `rosid-handler-js` will transform, bundles and compresses all matching JS files in your source folder.
 
@@ -43,13 +44,10 @@ Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]=functi
 
 ## Parameters
 
-- `filePath` `{String}` Absolute path to the requested file.
-- `srcPath` `{String}` Absolute path to the source folder.
-- `distPath` `{?String}` Absolute path to the export folder.
-- `route` `{Object}` The route which matched the request URL.
+- `filePath` `{String}` Absolute path to the file.
+- `opts` `{?Object}` Options.
+	- `optimize` `{?Boolean}` - Optimize output. Defaults to `false`.
 
 ## Returns
 
-- `{Promise}({Object})`
-	- `data` `{String | Buffer}` The transformed file content.
-	- `savePath` `{?String}` Where to save the file when compiling.
+- `{Promise}({String | Buffer})` The transformed file content.

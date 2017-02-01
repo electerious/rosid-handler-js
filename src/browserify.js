@@ -12,9 +12,9 @@ const envify     = require('loose-envify/custom')
  */
 module.exports = function(filePath, opts) {
 
-	const env = (opts!=null && opts.optimize===true) ? { NODE_ENV: 'production' } : {}
-
 	return new Promise((resolve, reject) => {
+
+		const env = (opts!=null && opts.optimize===true) ? { NODE_ENV: 'production' } : {}
 
 		browserify(filePath, {
 

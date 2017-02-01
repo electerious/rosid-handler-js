@@ -10,21 +10,18 @@ const uglifyjs = require('uglify-js')
  */
 module.exports = function(str, opts) {
 
-	// Do nothing when called with an empty string
-	if (str==null || str==='') return Promise.resolve('')
-
-	// Skip task when output should not be optimized
-	if (opts!=null && opts.optimize===false) return Promise.resolve(str)
-
 	return new Promise((resolve, reject) => {
 
-		resolve(uglifyjs.minify(str, {
-			fromString: true
-		}))
+		// Do nothing when called with an empty string
+		if (str==null || str==='') return resolve('')
 
-	}).then((result) => {
+		// Skip task when output should not be optimized
+		if (opts!=null && opts.optimize===false) return resolve(str)
 
-		return result.code
+		// Reduce size of JS
+		const result = uglifyjs.minify(str, { fromString: true })
+
+		resolve(result.code)
 
 	})
 
