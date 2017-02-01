@@ -44,7 +44,7 @@ Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]=functi
 
 ## Parameters
 
-- `filePath` `{String}` Absolute path to the file.
+- `filePath` `{String}` Absolute path to file.
 - `opts` `{?Object}` Options.
 	- `optimize` `{?Boolean}` - Optimize output. Defaults to `false`.
 

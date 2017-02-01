@@ -6,7 +6,7 @@ const uglifyjs   = require('./uglifyjs')
 /*
  * Load, transform, bundle and compress JS.
  * @public
- * @param {String} filePath - Absolute path to the requested file.
+ * @param {String} filePath - Absolute path to file.
  * @param {?Object} opts - Options.
  * @returns {Promise} Returns the following properties if resolved: {String}.
  */
