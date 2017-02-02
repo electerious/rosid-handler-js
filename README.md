@@ -12,6 +12,8 @@ npm install rosid-handler-js
 
 ## Usage
 
+### API
+
 ```js
 const js = require('rosid-handler-js')
 
@@ -19,7 +21,7 @@ js('/src/main.js').then((data) => {})
 js('/src/main.js', { optimize: true }).then((data) => {})
 ```
 
-## Rosid
+### Rosid
 
 Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid#routes). `rosid-handler-js` will transform, bundles and compresses all matching JS files in your source folder.
 
