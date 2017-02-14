@@ -31,6 +31,7 @@ describe('browserify()', function() {
 		}, (err) => {
 
 			assert.isNotNull(err)
+			assert.isDefined(err)
 
 		})
 
@@ -93,6 +94,7 @@ describe('browserify()', function() {
 		}, (err) => {
 
 			assert.isNotNull(err)
+			assert.isDefined(err)
 
 		})
 

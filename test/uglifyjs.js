@@ -64,6 +64,7 @@ describe('uglifyjs()', function() {
 		}, (err) => {
 
 			assert.isNotNull(err)
+			assert.isDefined(err)
 
 		})
 
