@@ -2,11 +2,12 @@
 
 const uglifyjs = require('uglify-js')
 
-/*
+/**
  * Compress JS using UglifyJS.
  * @public
  * @param {?String} str - JS.
  * @param {?Object} opts - Options for the task.
+ * @returns {Promise} Returns the following properties if resolved: {String}.
  */
 module.exports = function(str, opts) {
 

@@ -4,11 +4,12 @@ const browserify = require('browserify')
 const babelify   = require('babelify')
 const envify     = require('loose-envify/custom')
 
-/*
+/**
  * Transform JS with Babel and bundle it using Browserify.
  * @public
  * @param {String} filePath - Path to the JS file.
  * @param {?Object} opts - Options for the task.
+ * @returns {Promise} Returns the following properties if resolved: {String}.
  */
 module.exports = function(filePath, opts) {
 
@@ -32,7 +33,7 @@ module.exports = function(filePath, opts) {
 
 			if (err!=null) return reject(err)
 
-			return resolve(result.toString())
+			resolve(result.toString())
 
 		})
 
