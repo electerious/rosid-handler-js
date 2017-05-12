@@ -70,13 +70,14 @@ describe('uglifyjs()', function() {
 
 	})
 
-	it('should return JS when called with valid JS', function() {
+	it('should return JS without a source map when called with valid JS', function() {
 
 		const input = `function test() { return 'test'; }`
 
 		return uglifyjs(input, null).then((result) => {
 
 			assert.isString(result)
+			assert.notInclude(result, '//# sourceMappingURL')
 
 		})
 
