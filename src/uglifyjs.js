@@ -20,7 +20,7 @@ module.exports = function(str, opts) {
 		if (opts!=null && opts.optimize===false) return resolve(str)
 
 		// Reduce size of JS
-		const result = uglifyjs.minify(str, { fromString: true })
+		const result = uglifyjs.minify(str)
 
 		resolve(result.code)
 
