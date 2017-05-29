@@ -23,7 +23,8 @@ module.exports = function(filePath, opts) {
 
 		}).transform(babelify, {
 
-			presets: [ 'latest', 'react' ]
+			presets: [ 'latest', 'react' ],
+			babelrc: false
 
 		}).transform(envify(env), {
 
