@@ -59,6 +59,19 @@ describe('browserify()', function() {
 
 	})
 
+	it('should return untranspiled JS when called with a valid JS file and custom babel options', function() {
+
+		const input = `const fn = () => true`
+		const file = newFile(input, '.js')
+
+		return browserify(file, { babel: {} }).then((result) => {
+
+			assert.include(result, input)
+
+		})
+
+	})
+
 	it('should return JS and replace process.env.NODE_ENV when optimize is true', function() {
 
 		const file = newFile(`const fn = () => process.env.NODE_ENV`, '.js')

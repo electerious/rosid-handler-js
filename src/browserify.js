@@ -17,16 +17,17 @@ module.exports = function(filePath, opts) {
 
 		const env = (opts!=null && opts.optimize===true) ? { NODE_ENV: 'production' } : {}
 
+		// Use custom options when available or default options as a fallback
+		const babel = (opts!=null && typeof opts.babel==='object') ? opts.babel : {
+			presets: [ 'env', 'react' ],
+			babelrc: false
+		}
+
 		browserify(filePath, {
 
 			debug: true
 
-		}).transform(babelify, {
-
-			presets: [ 'latest', 'react' ],
-			babelrc: false
-
-		}).transform(envify(env), {
+		}).transform(babelify, babel).transform(envify(env), {
 
 			global: true
 
