@@ -23,7 +23,7 @@ js('main.js', { optimize: true }).then((data) => {})
 
 ### Rosid
 
-Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid#routes). `rosid-handler-js` will transform, bundles and compresses all matching JS files in your source folder.
+Add the following object to your `rosidfile.json`, `rosidfile.js` or [routes array](https://github.com/electerious/Rosid/blob/master/docs/Routes.md). `rosid-handler-js` will transform, bundles and compresses all matching JS files in your source folder.
 
 ```json
 {
