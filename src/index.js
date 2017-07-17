@@ -62,10 +62,10 @@ module.exports.out = function(opts) {
 
 /**
  * Attach an array to the function, which contains a list of
- * extensions used by the handler. The array will be used by Rosid for caching purposes.
+ * file patterns used by the handler. The array will be used by Rosid for caching purposes.
  * @public
  */
 module.exports.cache = [
-	'.js',
-	'.json'
+	'**/*.js',
+	'**/*.json'
 ]
