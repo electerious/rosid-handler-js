@@ -37,62 +37,48 @@ describe('browserify()', function() {
 
 	})
 
-	it('should return JS when called without a valid filePath', function() {
+	it('should return JS when called without a valid filePath', async function() {
 
-		return browserify(null, null).then((result) => {
+		const result = await browserify(null, null)
 
-			assert.isString(result)
-
-		})
+		assert.isString(result)
 
 	})
 
-	it('should return JS when called with a valid JS file', function() {
+	it('should return JS when called with a valid JS file', async function() {
 
 		const file = newFile(`const fn = () => process.env.NODE_ENV`, '.js')
+		const result = await browserify(file, null)
 
-		return browserify(file, null).then((result) => {
-
-			assert.isString(result)
-
-		})
+		assert.isString(result)
 
 	})
 
-	it('should return untranspiled JS when called with a valid JS file and custom babel options', function() {
+	it('should return untranspiled JS when called with a valid JS file and custom babel options', async function() {
 
 		const input = `const fn = () => true`
 		const file = newFile(input, '.js')
+		const result = await browserify(file, { babel: {} })
 
-		return browserify(file, { babel: {} }).then((result) => {
-
-			assert.include(result, input)
-
-		})
+		assert.include(result, input)
 
 	})
 
-	it('should return JS and replace process.env.NODE_ENV when optimize is true', function() {
+	it('should return JS and replace process.env.NODE_ENV when optimize is true', async function() {
 
 		const file = newFile(`const fn = () => process.env.NODE_ENV`, '.js')
+		const result = await browserify(file, { optimize: true })
 
-		return browserify(file, { optimize: true }).then((result) => {
-
-			assert.include(result, 'production')
-
-		})
+		assert.include(result, 'production')
 
 	})
 
-	it('should return JS and not replace process.env.NODE_ENV when optimize is false', function() {
+	it('should return JS and not replace process.env.NODE_ENV when optimize is false', async function() {
 
 		const file = newFile(`const fn = () => process.env.NODE_ENV`, '.js')
+		const result = await browserify(file, { optimize: false })
 
-		return browserify(file, { optimize: false }).then((result) => {
-
-			assert.include(result, 'process.env.NODE_ENV')
-
-		})
+		assert.include(result, 'process.env.NODE_ENV')
 
 	})
 

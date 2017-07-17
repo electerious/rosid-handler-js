@@ -7,26 +7,20 @@ const uglifyjs = require('uglify-js')
  * @public
  * @param {?String} str - JS.
  * @param {?Object} opts - Options for the task.
- * @returns {Promise} Returns the following properties if resolved: {String}.
+ * @returns {String} Returns the following properties if resolved: {String}.
  */
-module.exports = function(str, opts) {
+module.exports = async function(str, opts) {
 
-	return new Promise((resolve, reject) => {
+	// Do nothing when called with an empty string
+	if (str==null || str==='') return ''
 
-		// Do nothing when called with an empty string
-		if (str==null || str==='') return resolve('')
+	// Skip task when output should not be optimized
+	if (opts!=null && opts.optimize===false) return str
 
-		// Skip task when output should not be optimized
-		if (opts!=null && opts.optimize===false) return resolve(str)
+	const result = uglifyjs.minify(str)
 
-		// Reduce size of JS
-		const result = uglifyjs.minify(str)
+	if (result.error!=null) throw result.error
 
-		// Reject with error when compressing went wrong
-		if (result.error!=null) return reject(result.error)
-
-		resolve(result.code)
-
-	})
+	return result.code
 
 }

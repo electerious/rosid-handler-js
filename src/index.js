@@ -1,7 +1,7 @@
 'use strict'
 
 const browserify = require('./browserify')
-const uglifyjs   = require('./uglifyjs')
+const uglifyjs = require('./uglifyjs')
 
 /**
  * Load, transform, bundle and compress JS.
@@ -10,29 +10,17 @@ const uglifyjs   = require('./uglifyjs')
  * @param {?Object} opts - Options.
  * @returns {Promise} Returns the following properties if resolved: {String}.
  */
-module.exports = function(filePath, opts) {
+module.exports = async function(filePath, opts) {
 
-	return Promise.resolve().then(() => {
+	if (typeof filePath!=='string') throw new Error(`'filePath' must be a string`)
+	if (typeof opts!=='object' && opts!=null) throw new Error(`'opts' must be undefined, null or an object`)
 
-		if (typeof filePath!=='string')           throw new Error(`'filePath' must be a string`)
-		if (typeof opts!=='object' && opts!=null) throw new Error(`'opts' must be undefined, null or an object`)
+	let output = null
 
-	}).then((str) => {
+	output = await browserify(filePath, opts)
+	output = await uglifyjs(output, opts)
 
-		// Process data with browserify
-		return browserify(filePath, opts)
-
-	}).then((str) => {
-
-		// Process data with uglifyjs
-		return uglifyjs(str, opts)
-
-	}).then((str) => {
-
-		// Return data
-		return str
-
-	})
+	return output
 
 }
 

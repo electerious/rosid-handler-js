@@ -24,7 +24,7 @@ describe('index()', function() {
 
 	it('should return an error when called without a filePath', function() {
 
-		return index().then((data) => {
+		return index().then((result) => {
 
 			throw new Error('Returned without error')
 
@@ -41,7 +41,7 @@ describe('index()', function() {
 
 		const file = newFile('const fn = () => {}', '.js')
 
-		return index(file, '').then((data) => {
+		return index(file, '').then((result) => {
 
 			throw new Error('Returned without error')
 
@@ -56,7 +56,7 @@ describe('index()', function() {
 
 	it('should return an error when called with a fictive filePath', function() {
 
-		return index('test.js').then((data) => {
+		return index('test.js').then((result) => {
 
 			throw new Error('Returned without error')
 
@@ -73,7 +73,7 @@ describe('index()', function() {
 
 		const file = newFile('=', '.js')
 
-		return index(file).then((data) => {
+		return index(file).then((result) => {
 
 			throw new Error('Returned without error')
 
@@ -86,27 +86,21 @@ describe('index()', function() {
 
 	})
 
-	it('should load JS and transform it to JS', function() {
+	it('should load JS and transform it to JS', async function() {
 
 		const file = newFile('const fn = () => {}', '.js')
+		const result = await index(file)
 
-		return index(file).then((data) => {
-
-			assert.isString(data)
-
-		})
+		assert.isString(result)
 
 	})
 
-	it('should load JS and transform it to optimized JS when optimization enabled', function() {
+	it('should load JS and transform it to optimized JS when optimization enabled', async function() {
 
 		const file = newFile('const fn = () => {}', '.js')
+		const result = await index(file, { optimize: true })
 
-		return index(file, { optimize: true }).then((data) => {
-
-			assert.isString(data)
-
-		})
+		assert.isString(result)
 
 	})
 
