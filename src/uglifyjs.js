@@ -7,11 +7,10 @@ const uglifyjs = require('uglify-js')
  * @public
  * @param {?String} str - JS.
  * @param {?Object} opts - Options for the task.
- * @returns {String} Returns the following properties if resolved: {String}.
+ * @returns {Promise} Returns the following properties if resolved: {String}.
  */
 module.exports = async function(str, opts) {
 
-	// Do nothing when called with an empty string
 	if (str==null || str==='') return ''
 
 	// Skip task when output should not be optimized
