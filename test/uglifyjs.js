@@ -42,7 +42,7 @@ describe('uglifyjs()', function() {
 
 	})
 
-	it('should return an error when called with incorrect JS', function() {
+	it('should return an error when called with incorrect JS', async function() {
 
 		const input = `return`
 

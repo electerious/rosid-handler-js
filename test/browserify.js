@@ -12,7 +12,7 @@ const fsify = require('fsify')({
 
 describe('browserify()', function() {
 
-	it('should return an error when called with a fictive filePath', function() {
+	it('should return an error when called with a fictive filePath', async function() {
 
 		return browserify('test.js', null).then((result) => {
 

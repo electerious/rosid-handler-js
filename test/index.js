@@ -12,7 +12,7 @@ const fsify = require('fsify')({
 
 describe('index()', function() {
 
-	it('should return an error when called without a filePath', function() {
+	it('should return an error when called without a filePath', async function() {
 
 		return index().then((result) => {
 
@@ -50,7 +50,7 @@ describe('index()', function() {
 
 	})
 
-	it('should return an error when called with a fictive filePath', function() {
+	it('should return an error when called with a fictive filePath', async function() {
 
 		const file = `${ uuid() }.js`
 
