@@ -1,8 +1,8 @@
 'use strict'
 
-const path       = require('path')
-const assert     = require('chai').assert
-const uuid       = require('uuid/v4')
+const path = require('path')
+const assert = require('chai').assert
+const uuid = require('uuid/v4')
 const browserify = require('./../src/browserify')
 
 const fsify = require('fsify')({
