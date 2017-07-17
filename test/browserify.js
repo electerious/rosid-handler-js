@@ -41,7 +41,7 @@ describe('browserify()', function() {
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
-				contents: `const fn = () => process.env.NODE_ENV`
+				contents: 'const fn = () => process.env.NODE_ENV'
 			}
 		]
 
@@ -58,7 +58,7 @@ describe('browserify()', function() {
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
-				contents: `const fn = () => true`
+				contents: 'const fn = () => true'
 			}
 		]
 
@@ -75,7 +75,7 @@ describe('browserify()', function() {
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
-				contents: `const fn = () => process.env.NODE_ENV`
+				contents: 'const fn = () => process.env.NODE_ENV'
 			}
 		]
 
@@ -92,7 +92,7 @@ describe('browserify()', function() {
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
-				contents: `const fn = () => process.env.NODE_ENV`
+				contents: 'const fn = () => process.env.NODE_ENV'
 			}
 		]
 
@@ -109,7 +109,7 @@ describe('browserify()', function() {
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
-				contents: `=`
+				contents: '='
 			}
 		]
 

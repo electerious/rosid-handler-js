@@ -15,7 +15,7 @@ describe('uglifyjs()', function() {
 
 	it('should return an empty string when called with an empty JS string', async function() {
 
-		const input = ``
+		const input = ''
 		const result = await uglifyjs(input, null)
 
 		assert.strictEqual(result, '')
@@ -24,7 +24,7 @@ describe('uglifyjs()', function() {
 
 	it('should return the input when called with incorrect JS and optimization disabled', async function() {
 
-		const input = `return`
+		const input = 'return'
 		const opts  = { optimize: false }
 		const result = await uglifyjs(input, opts)
 
@@ -44,7 +44,7 @@ describe('uglifyjs()', function() {
 
 	it('should return an error when called with incorrect JS', async function() {
 
-		const input = `return`
+		const input = 'return'
 
 		return uglifyjs(input, null).then((result) => {
 

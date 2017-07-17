@@ -32,7 +32,7 @@ describe('index()', function() {
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
-				contents: `const fn = () => {}`
+				contents: 'const fn = () => {}'
 			}
 		]
 
@@ -73,7 +73,7 @@ describe('index()', function() {
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
-				contents: `=`
+				contents: '='
 			}
 		]
 
@@ -98,7 +98,7 @@ describe('index()', function() {
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
-				contents: `const fn = () => {}`
+				contents: 'const fn = () => {}'
 			}
 		]
 
@@ -115,7 +115,7 @@ describe('index()', function() {
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
-				contents: `const fn = () => {}`
+				contents: 'const fn = () => {}'
 			}
 		]
 
