@@ -1,24 +1,14 @@
 'use strict'
 
-const crypto     = require('crypto')
-const fs         = require('fs')
+const path       = require('path')
 const assert     = require('chai').assert
-const temp       = require('temp').track()
+const uuid       = require('uuid/v4')
 const browserify = require('./../src/browserify')
 
-const newFile = function(content, suffix) {
-
-	// Create file in __dirname so Babel can load its presets
-	const file = temp.openSync({
-		dir    : __dirname,
-		suffix : suffix
-	})
-
-	fs.writeFileSync(file.path, content)
-
-	return file.path
-
-}
+const fsify = require('fsify')({
+	cwd: __dirname,
+	persistent: false
+})
 
 describe('browserify()', function() {
 
@@ -47,7 +37,15 @@ describe('browserify()', function() {
 
 	it('should return JS when called with a valid JS file', async function() {
 
-		const file = newFile(`const fn = () => process.env.NODE_ENV`, '.js')
+		const structure = [
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: `const fn = () => process.env.NODE_ENV`
+			}
+		]
+
+		const file = (await fsify(structure))[0].name
 		const result = await browserify(file, null)
 
 		assert.isString(result)
@@ -56,17 +54,32 @@ describe('browserify()', function() {
 
 	it('should return untranspiled JS when called with a valid JS file and custom babel options', async function() {
 
-		const input = `const fn = () => true`
-		const file = newFile(input, '.js')
+		const structure = [
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: `const fn = () => true`
+			}
+		]
+
+		const file = (await fsify(structure))[0].name
 		const result = await browserify(file, { babel: {} })
 
-		assert.include(result, input)
+		assert.include(result, structure[0].contents)
 
 	})
 
 	it('should return JS and replace process.env.NODE_ENV when optimize is true', async function() {
 
-		const file = newFile(`const fn = () => process.env.NODE_ENV`, '.js')
+		const structure = [
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: `const fn = () => process.env.NODE_ENV`
+			}
+		]
+
+		const file = (await fsify(structure))[0].name
 		const result = await browserify(file, { optimize: true })
 
 		assert.include(result, 'production')
@@ -75,16 +88,32 @@ describe('browserify()', function() {
 
 	it('should return JS and not replace process.env.NODE_ENV when optimize is false', async function() {
 
-		const file = newFile(`const fn = () => process.env.NODE_ENV`, '.js')
+		const structure = [
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: `const fn = () => process.env.NODE_ENV`
+			}
+		]
+
+		const file = (await fsify(structure))[0].name
 		const result = await browserify(file, { optimize: false })
 
 		assert.include(result, 'process.env.NODE_ENV')
 
 	})
 
-	it('should return an error when called with an invalid JS file', function() {
+	it('should return an error when called with an invalid JS file', async function() {
 
-		const file = newFile(`=`, '.js')
+		const structure = [
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: `=`
+			}
+		]
+
+		const file = (await fsify(structure))[0].name
 
 		return browserify(file, null).then((result) => {
 

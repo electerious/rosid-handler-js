@@ -1,24 +1,14 @@
 'use strict'
 
-const fs     = require('fs')
 const path   = require('path')
 const assert = require('chai').assert
-const temp   = require('temp').track()
+const uuid   = require('uuid/v4')
 const index  = require('./../src/index')
 
-const newFile = function(content, suffix) {
-
-	// File must be in current dir so babel-register can load the plugins and presents
-	const file = temp.openSync({
-		dir    : __dirname,
-		suffix : suffix
-	})
-
-	fs.writeFileSync(file.path, content)
-
-	return file.path
-
-}
+const fsify = require('fsify')({
+	cwd: __dirname,
+	persistent: false
+})
 
 describe('index()', function() {
 
@@ -30,16 +20,23 @@ describe('index()', function() {
 
 		}, (err) => {
 
-			assert.isNotNull(err)
-			assert.isDefined(err)
+			assert.strictEqual(`'filePath' must be a string`, err.message)
 
 		})
 
 	})
 
-	it('should return an error when called with invalid options', function() {
+	it('should return an error when called with invalid options', async function() {
 
-		const file = newFile('const fn = () => {}', '.js')
+		const structure = [
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: `const fn = () => {}`
+			}
+		]
+
+		const file = (await fsify(structure))[0].name
 
 		return index(file, '').then((result) => {
 
@@ -47,8 +44,7 @@ describe('index()', function() {
 
 		}, (err) => {
 
-			assert.isNotNull(err)
-			assert.isDefined(err)
+			assert.strictEqual(`'opts' must be undefined, null or an object`, err.message)
 
 		})
 
@@ -56,7 +52,9 @@ describe('index()', function() {
 
 	it('should return an error when called with a fictive filePath', function() {
 
-		return index('test.js').then((result) => {
+		const file = `${ uuid() }.js`
+
+		return index(file).then((result) => {
 
 			throw new Error('Returned without error')
 
@@ -69,9 +67,17 @@ describe('index()', function() {
 
 	})
 
-	it('should return an error when called with an invalid JS file', function() {
+	it('should return an error when called with an invalid JS file', async function() {
 
-		const file = newFile('=', '.js')
+		const structure = [
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: `=`
+			}
+		]
+
+		const file = (await fsify(structure))[0].name
 
 		return index(file).then((result) => {
 
@@ -88,7 +94,15 @@ describe('index()', function() {
 
 	it('should load JS and transform it to JS', async function() {
 
-		const file = newFile('const fn = () => {}', '.js')
+		const structure = [
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: `const fn = () => {}`
+			}
+		]
+
+		const file = (await fsify(structure))[0].name
 		const result = await index(file)
 
 		assert.isString(result)
@@ -97,7 +111,15 @@ describe('index()', function() {
 
 	it('should load JS and transform it to optimized JS when optimization enabled', async function() {
 
-		const file = newFile('const fn = () => {}', '.js')
+		const structure = [
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: `const fn = () => {}`
+			}
+		]
+
+		const file = (await fsify(structure))[0].name
 		const result = await index(file, { optimize: true })
 
 		assert.isString(result)
