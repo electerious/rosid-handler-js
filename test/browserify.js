@@ -37,16 +37,15 @@ describe('browserify()', function() {
 
 	it('should return JS when called with a valid JS file', async function() {
 
-		const structure = [
+		const structure = await fsify([
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
 				contents: 'const fn = () => process.env.NODE_ENV'
 			}
-		]
+		])
 
-		const file = (await fsify(structure))[0].name
-		const result = await browserify(file, null)
+		const result = await browserify(structure[0].name, null)
 
 		assert.isString(result)
 
@@ -54,16 +53,15 @@ describe('browserify()', function() {
 
 	it('should return untranspiled JS when called with a valid JS file and custom babel options', async function() {
 
-		const structure = [
+		const structure = await fsify([
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
 				contents: 'const fn = () => true'
 			}
-		]
+		])
 
-		const file = (await fsify(structure))[0].name
-		const result = await browserify(file, { babel: {} })
+		const result = await browserify(structure[0].name, { babel: {} })
 
 		assert.include(result, structure[0].contents)
 
@@ -71,16 +69,15 @@ describe('browserify()', function() {
 
 	it('should return JS and replace process.env.NODE_ENV when optimize is true', async function() {
 
-		const structure = [
+		const structure = await fsify([
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
 				contents: 'const fn = () => process.env.NODE_ENV'
 			}
-		]
+		])
 
-		const file = (await fsify(structure))[0].name
-		const result = await browserify(file, { optimize: true })
+		const result = await browserify(structure[0].name, { optimize: true })
 
 		assert.include(result, 'production')
 
@@ -88,16 +85,15 @@ describe('browserify()', function() {
 
 	it('should return JS and not replace process.env.NODE_ENV when optimize is false', async function() {
 
-		const structure = [
+		const structure = await fsify([
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
 				contents: 'const fn = () => process.env.NODE_ENV'
 			}
-		]
+		])
 
-		const file = (await fsify(structure))[0].name
-		const result = await browserify(file, { optimize: false })
+		const result = await browserify(structure[0].name, { optimize: false })
 
 		assert.include(result, 'process.env.NODE_ENV')
 
@@ -105,17 +101,15 @@ describe('browserify()', function() {
 
 	it('should return an error when called with an invalid JS file', async function() {
 
-		const structure = [
+		const structure = await fsify([
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
 				contents: '='
 			}
-		]
+		])
 
-		const file = (await fsify(structure))[0].name
-
-		return browserify(file, null).then((result) => {
+		return browserify(structure[0].name, null).then((result) => {
 
 			throw new Error('Returned without error')
 

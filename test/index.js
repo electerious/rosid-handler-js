@@ -28,17 +28,15 @@ describe('index()', function() {
 
 	it('should return an error when called with invalid options', async function() {
 
-		const structure = [
+		const structure = await fsify([
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
 				contents: 'const fn = () => {}'
 			}
-		]
+		])
 
-		const file = (await fsify(structure))[0].name
-
-		return index(file, '').then((result) => {
+		return index(structure[0].name, '').then((result) => {
 
 			throw new Error('Returned without error')
 
@@ -52,9 +50,7 @@ describe('index()', function() {
 
 	it('should return an error when called with a fictive filePath', async function() {
 
-		const file = `${ uuid() }.js`
-
-		return index(file).then((result) => {
+		return index(`${ uuid() }.js`).then((result) => {
 
 			throw new Error('Returned without error')
 
@@ -69,17 +65,15 @@ describe('index()', function() {
 
 	it('should return an error when called with an invalid JS file', async function() {
 
-		const structure = [
+		const structure = await fsify([
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
 				contents: '='
 			}
-		]
+		])
 
-		const file = (await fsify(structure))[0].name
-
-		return index(file).then((result) => {
+		return index(structure[0].name).then((result) => {
 
 			throw new Error('Returned without error')
 
@@ -94,16 +88,15 @@ describe('index()', function() {
 
 	it('should load JS and transform it to JS', async function() {
 
-		const structure = [
+		const structure = await fsify([
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
 				contents: 'const fn = () => {}'
 			}
-		]
+		])
 
-		const file = (await fsify(structure))[0].name
-		const result = await index(file)
+		const result = await index(structure[0].name)
 
 		assert.isString(result)
 
@@ -111,16 +104,15 @@ describe('index()', function() {
 
 	it('should load JS and transform it to optimized JS when optimization enabled', async function() {
 
-		const structure = [
+		const structure = await fsify([
 			{
 				type: fsify.FILE,
 				name: `${ uuid() }.js`,
 				contents: 'const fn = () => {}'
 			}
-		]
+		])
 
-		const file = (await fsify(structure))[0].name
-		const result = await index(file, { optimize: true })
+		const result = await index(structure[0].name, { optimize: true })
 
 		assert.isString(result)
 
