@@ -18,15 +18,14 @@ describe('uglifyjs()', function() {
 		const input = ''
 		const result = await uglifyjs(input, null)
 
-		assert.strictEqual(result, '')
+		assert.strictEqual(result, input)
 
 	})
 
 	it('should return the input when called with incorrect JS and optimization disabled', async function() {
 
 		const input = 'return'
-		const opts  = { optimize: false }
-		const result = await uglifyjs(input, opts)
+		const result = await uglifyjs(input, { optimize: false })
 
 		assert.strictEqual(result, input)
 
@@ -35,8 +34,7 @@ describe('uglifyjs()', function() {
 	it('should return the input when called with valid JS and optimization disabled', async function() {
 
 		const input = `function test() { return 'test'; }`
-		const opts  = { optimize: false }
-		const result = await uglifyjs(input, opts)
+		const result = await uglifyjs(input, { optimize: false })
 
 		assert.strictEqual(result, input)
 
