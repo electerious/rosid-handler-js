@@ -7,7 +7,7 @@ const uglifyjs = require('uglify-js')
  * @public
  * @param {?String} str - JS.
  * @param {?Object} opts - Options for the task.
- * @returns {Promise} Returns the following properties if resolved: {String}.
+ * @returns {Promise<String>} Compressed JS.
  */
 module.exports = async function(str, opts) {
 

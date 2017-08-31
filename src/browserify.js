@@ -9,7 +9,7 @@ const envify = require('loose-envify/custom')
  * @public
  * @param {String} filePath - Path to the JS file.
  * @param {?Object} opts - Options for the task.
- * @returns {Promise} Returns the following properties if resolved: {String}.
+ * @returns {Promise<String>} Transformed and bundled JS.
  */
 module.exports = async function(filePath, opts) {
 

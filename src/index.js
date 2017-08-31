@@ -8,7 +8,7 @@ const uglifyjs = require('./uglifyjs')
  * @public
  * @param {String} filePath - Absolute path to file.
  * @param {?Object} opts - Options.
- * @returns {Promise} Returns the following properties if resolved: {String}.
+ * @returns {Promise<String>} JS.
  */
 module.exports = async function(filePath, opts) {
 
