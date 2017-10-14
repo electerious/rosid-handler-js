@@ -1,7 +1,7 @@
 'use strict'
 
 const browserify = require('./browserify')
-const uglifyjs = require('./uglifyjs')
+const uglify = require('./uglify')
 
 /**
  * Load, transform, bundle and compress JS.
@@ -18,7 +18,7 @@ module.exports = async function(filePath, opts) {
 	let output = null
 
 	output = await browserify(filePath, opts)
-	output = await uglifyjs(output, opts)
+	output = await uglify(output, opts)
 
 	return output
 

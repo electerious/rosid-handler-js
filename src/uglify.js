@@ -1,6 +1,6 @@
 'use strict'
 
-const uglifyjs = require('uglify-js')
+const uglify = require('uglify-js')
 
 /**
  * Compress JS using UglifyJS.
@@ -16,7 +16,7 @@ module.exports = async function(str, opts) {
 	// Skip task when output should not be optimized
 	if (opts!=null && opts.optimize===false) return str
 
-	const result = uglifyjs.minify(str)
+	const result = uglify.minify(str)
 
 	if (result.error!=null) throw result.error
 
