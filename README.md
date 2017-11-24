@@ -15,10 +15,10 @@ npm install rosid-handler-js
 ### API
 
 ```js
-const js = require('rosid-handler-js')
+const handler = require('rosid-handler-js')
 
-js('main.js').then((data) => {})
-js('main.js', { optimize: true }).then((data) => {})
+handler('main.js').then((data) => {})
+handler('main.js', { optimize: true }).then((data) => {})
 ```
 
 ### Rosid
