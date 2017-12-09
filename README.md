@@ -49,6 +49,7 @@ Object.defineProperty(exports,"__esModule",{value:!0}),exports["default"]=functi
 - `filePath` `{String}` Absolute path to file.
 - `opts` `{?Object}` Options.
 	- `optimize` `{?Boolean}` - Optimize output. Defaults to `false`.
+	- `browserify` `{?Object}` - Browserify [options](https://github.com/browserify/browserify). Defaults to an object with `debug` enabled.
 	- `babel` `{?Object}` - Babel [options](https://babeljs.io/docs/usage/api/). Defaults to an object with the presets [env](http://babeljs.io/docs/plugins/preset-env/) and [react](http://babeljs.io/docs/plugins/preset-react/).
 
 ## Returns

@@ -67,6 +67,22 @@ describe('browserify()', function() {
 
 	})
 
+	it('should return JS without source maps when called with a valid JS file and custom browserify options', async function() {
+
+		const structure = await fsify([
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: 'const fn = () => true'
+			}
+		])
+
+		const result = await browserify(structure[0].name, { browserify: {} })
+
+		assert.notInclude(result, 'sourceMappingURL')
+
+	})
+
 	it('should return JS and replace process.env.NODE_ENV when optimize is true', async function() {
 
 		const structure = await fsify([
