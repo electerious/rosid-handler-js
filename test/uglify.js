@@ -44,7 +44,7 @@ describe('uglify()', function() {
 
 		const input = 'return'
 
-		return uglify(input, null).then((result) => {
+		return uglify(input, null).then(() => {
 
 			throw new Error('Returned without error')
 

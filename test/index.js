@@ -1,6 +1,5 @@
 'use strict'
 
-const path = require('path')
 const assert = require('chai').assert
 const uuid = require('uuid/v4')
 const index = require('./../src/index')
@@ -14,7 +13,7 @@ describe('index()', function() {
 
 	it('should return an error when called without a filePath', async function() {
 
-		return index().then((result) => {
+		return index().then(() => {
 
 			throw new Error('Returned without error')
 
@@ -36,7 +35,7 @@ describe('index()', function() {
 			}
 		])
 
-		return index(structure[0].name, '').then((result) => {
+		return index(structure[0].name, '').then(() => {
 
 			throw new Error('Returned without error')
 
@@ -50,7 +49,7 @@ describe('index()', function() {
 
 	it('should return an error when called with a fictive filePath', async function() {
 
-		return index(`${ uuid() }.js`).then((result) => {
+		return index(`${ uuid() }.js`).then(() => {
 
 			throw new Error('Returned without error')
 
@@ -73,7 +72,7 @@ describe('index()', function() {
 			}
 		])
 
-		return index(structure[0].name).then((result) => {
+		return index(structure[0].name).then(() => {
 
 			throw new Error('Returned without error')
 

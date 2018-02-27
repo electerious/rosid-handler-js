@@ -1,6 +1,5 @@
 'use strict'
 
-const path = require('path')
 const assert = require('chai').assert
 const uuid = require('uuid/v4')
 const browserify = require('./../src/browserify')
@@ -14,7 +13,7 @@ describe('browserify()', function() {
 
 	it('should return an error when called with a fictive filePath', async function() {
 
-		return browserify('test.js', null).then((result) => {
+		return browserify('test.js', null).then(() => {
 
 			throw new Error('Returned without error')
 
@@ -125,7 +124,7 @@ describe('browserify()', function() {
 			}
 		])
 
-		return browserify(structure[0].name, null).then((result) => {
+		return browserify(structure[0].name, null).then(() => {
 
 			throw new Error('Returned without error')
 
