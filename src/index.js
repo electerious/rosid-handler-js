@@ -12,8 +12,8 @@ const uglify = require('./uglify')
  */
 module.exports = async function(filePath, opts) {
 
-	if (typeof filePath!=='string') throw new Error(`'filePath' must be a string`)
-	if (typeof opts!=='object' && opts!=null) throw new Error(`'opts' must be undefined, null or an object`)
+	if (typeof filePath !== 'string') throw new Error(`'filePath' must be a string`)
+	if (typeof opts !== 'object' && opts != null) throw new Error(`'opts' must be undefined, null or an object`)
 
 	let output = null
 
@@ -32,7 +32,7 @@ module.exports = async function(filePath, opts) {
  */
 module.exports.in = function(opts) {
 
-	return (opts!=null && opts.in!=null) ? opts.in : '.js'
+	return (opts != null && opts.in != null) ? opts.in : '.js'
 
 }
 
@@ -44,7 +44,7 @@ module.exports.in = function(opts) {
  */
 module.exports.out = function(opts) {
 
-	return (opts!=null && opts.out!=null) ? opts.out : '.js'
+	return (opts != null && opts.out != null) ? opts.out : '.js'
 
 }
 

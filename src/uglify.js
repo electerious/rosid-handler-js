@@ -11,14 +11,14 @@ const uglify = require('uglify-js')
  */
 module.exports = async function(str, opts) {
 
-	if (str==null || str==='') return ''
+	if (str == null || str === '') return ''
 
 	// Skip task when output should not be optimized
-	if (opts!=null && opts.optimize===false) return str
+	if (opts != null && opts.optimize === false) return str
 
 	const result = uglify.minify(str)
 
-	if (result.error!=null) throw result.error
+	if (result.error != null) throw result.error
 
 	return result.code
 

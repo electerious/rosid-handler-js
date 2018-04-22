@@ -13,16 +13,16 @@ const envify = require('loose-envify/custom')
  */
 module.exports = async function(filePath, opts) {
 
-	const env = (opts!=null && opts.optimize===true) ? { NODE_ENV: 'production' } : {}
+	const env = (opts != null && opts.optimize === true) ? { NODE_ENV: 'production' } : {}
 
 	// Use custom options when available or default options as a fallback
-	const babelOpts = (opts!=null && typeof opts.babel==='object') ? opts.babel : {
+	const babelOpts = (opts != null && typeof opts.babel === 'object') ? opts.babel : {
 		presets: [ 'env', 'react' ],
 		babelrc: false
 	}
 
 	// Use custom options when available or default options as a fallback
-	const browserifyOpts = (opts!=null && typeof opts.browserify==='object') ? opts.browserify : {
+	const browserifyOpts = (opts != null && typeof opts.browserify === 'object') ? opts.browserify : {
 		debug: true
 	}
 
@@ -35,7 +35,7 @@ module.exports = async function(filePath, opts) {
 
 		const next = (err, result) => {
 
-			if (err!=null) return reject(err)
+			if (err != null) return reject(err)
 
 			resolve(result.toString())
 
