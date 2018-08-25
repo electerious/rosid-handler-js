@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Changed
 
 - Removed `prepublish` script from `package.json`
+- Only support Node.js 8+
 
 ## [10.1.0] - 2017-12-08
 
