@@ -17,7 +17,7 @@ module.exports = async function(filePath, opts) {
 
 	// Use custom options when available or default options as a fallback
 	const babelOpts = (opts != null && typeof opts.babel === 'object') ? opts.babel : {
-		presets: [ 'env', 'react' ],
+		presets: [ '@babel/preset-env', '@babel/preset-react' ],
 		babelrc: false
 	}
 
