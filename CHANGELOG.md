@@ -19,7 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [10.1.0] - 2017-12-08
 
-### New
+### Added
 
 - Added `browserify` option
 
@@ -39,7 +39,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [10.0.0] - 2017-07-19
 
-### New
+### Added
 
 - Only support Node.js 7 and 8
 
