@@ -30,20 +30,20 @@
     "test": "nyc node_modules/mocha/bin/_mocha"
   },
   "dependencies": {
-    "@babel/core": "^7.0.1",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "babelify": "^10.0.0",
-    "browserify": "^16.2.0",
+    "browserify": "^16.2.3",
     "fsify": "^3.0.0",
     "loose-envify": "^1.4.0",
     "uglify-js": "^3.4.9",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "coveralls": "^3.0.2",
     "mocha": "^5.1.1",
-    "nyc": "^13.0.1"
+    "nyc": "^13.1.0"
   }
 }
