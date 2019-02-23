@@ -15,6 +15,10 @@ module.exports = async function(filePath, opts) {
 	if (typeof filePath !== 'string') throw new Error(`'filePath' must be a string`)
 	if (typeof opts !== 'object' && opts != null) throw new Error(`'opts' must be undefined, null or an object`)
 
+	opts = Object.assign({
+		optimize: false
+	}, opts)
+
 	let output = null
 
 	output = await browserify(filePath, opts)

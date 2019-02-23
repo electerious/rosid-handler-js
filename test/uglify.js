@@ -5,32 +5,6 @@ const uglify = require('./../src/uglify')
 
 describe('uglify()', function() {
 
-	it('should return an empty string when called without parameters', async function() {
-
-		const result = await uglify(null, null)
-
-		assert.strictEqual(result, '')
-
-	})
-
-	it('should return an empty string when called with an empty JS string', async function() {
-
-		const input = ''
-		const result = await uglify(input, null)
-
-		assert.strictEqual(result, input)
-
-	})
-
-	it('should return the input when called with incorrect JS and optimization disabled', async function() {
-
-		const input = 'return'
-		const result = await uglify(input, { optimize: false })
-
-		assert.strictEqual(result, input)
-
-	})
-
 	it('should return the input when called with valid JS and optimization disabled', async function() {
 
 		const input = `function test() { return 'test'; }`
@@ -44,7 +18,7 @@ describe('uglify()', function() {
 
 		const input = 'return'
 
-		return uglify(input, null).then(() => {
+		return uglify(input, { optimize: true }).then(() => {
 
 			throw new Error('Returned without error')
 
@@ -60,7 +34,7 @@ describe('uglify()', function() {
 	it('should return JS without a source map when called with valid JS', async function() {
 
 		const input = `function test() { return 'test'; }`
-		const result = await uglify(input, null)
+		const result = await uglify(input, { optimize: true })
 
 		assert.isString(result)
 		assert.notInclude(result, '//# sourceMappingURL')

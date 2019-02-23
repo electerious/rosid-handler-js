@@ -13,7 +13,7 @@ describe('browserify()', function() {
 
 	it('should return an error when called with a fictive filePath', async function() {
 
-		return browserify('test.js', null).then(() => {
+		return browserify('test.js', {}).then(() => {
 
 			throw new Error('Returned without error')
 
@@ -28,7 +28,7 @@ describe('browserify()', function() {
 
 	it('should return JS when called without a valid filePath', async function() {
 
-		const result = await browserify(null, null)
+		const result = await browserify(null, {})
 
 		assert.isString(result)
 
@@ -44,7 +44,7 @@ describe('browserify()', function() {
 			}
 		])
 
-		const result = await browserify(structure[0].name, null)
+		const result = await browserify(structure[0].name, {})
 
 		assert.isString(result)
 
@@ -124,7 +124,7 @@ describe('browserify()', function() {
 			}
 		])
 
-		return browserify(structure[0].name, null).then(() => {
+		return browserify(structure[0].name, {}).then(() => {
 
 			throw new Error('Returned without error')
 
