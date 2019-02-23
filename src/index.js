@@ -10,10 +10,10 @@ const uglify = require('./uglify')
  * @param {?Object} opts - Options.
  * @returns {Promise<String>} JS.
  */
-module.exports = async function(filePath, opts) {
+module.exports = async function(filePath, opts = {}) {
 
 	if (typeof filePath !== 'string') throw new Error(`'filePath' must be a string`)
-	if (typeof opts !== 'object' && opts != null) throw new Error(`'opts' must be undefined, null or an object`)
+	if (typeof opts !== 'object') throw new Error(`'opts' must be undefined, null or an object`)
 
 	opts = Object.assign({
 		optimize: false
