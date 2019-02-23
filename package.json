@@ -30,7 +30,7 @@
     "test": "nyc node_modules/mocha/bin/_mocha"
   },
   "dependencies": {
-    "@babel/core": "^7.2.2",
+    "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
     "babelify": "^10.0.0",
@@ -42,8 +42,8 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "coveralls": "^3.0.2",
+    "coveralls": "^3.0.3",
     "mocha": "^6.0.0",
-    "nyc": "^13.2.0"
+    "nyc": "^13.3.0"
   }
 }
