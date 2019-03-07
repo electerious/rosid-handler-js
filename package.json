@@ -14,7 +14,7 @@
     "js",
     "babel",
     "browserify",
-    "uglifyjs"
+    "terser"
   ],
   "license": "MIT",
   "homepage": "https://github.com/electerious/rosid-handler-js",
@@ -37,7 +37,7 @@
     "browserify": "^16.2.3",
     "fsify": "^3.0.0",
     "loose-envify": "^1.4.0",
-    "uglify-js": "^3.4.9",
+    "terser": "^3.16.1",
     "uuid": "^3.2.1"
   },
   "devDependencies": {

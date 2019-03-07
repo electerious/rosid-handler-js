@@ -1,9 +1,9 @@
 'use strict'
 
-const uglify = require('uglify-js')
+const terser = require('terser')
 
 /**
- * Compress JS using UglifyJS.
+ * Compress JS using Terser.
  * @public
  * @param {String} str - JS.
  * @param {Object} opts - Options for the task.
@@ -14,7 +14,7 @@ module.exports = async function(str, opts) {
 	// Skip task when output should not be optimized
 	if (opts.optimize !== true) return str
 
-	const result = uglify.minify(str)
+	const result = terser.minify(str)
 
 	if (result.error != null) throw result.error
 

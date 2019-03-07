@@ -1,7 +1,7 @@
 'use strict'
 
 const browserify = require('./browserify')
-const uglify = require('./uglify')
+const terser = require('./terser')
 
 /**
  * Load, transform, bundle and compress JS.
@@ -22,7 +22,7 @@ module.exports = async function(filePath, opts = {}) {
 	let output = null
 
 	output = await browserify(filePath, opts)
-	output = await uglify(output, opts)
+	output = await terser(output, opts)
 
 	return output
 
