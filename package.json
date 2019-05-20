@@ -37,7 +37,7 @@
     "browserify": "^16.2.3",
     "fsify": "^3.0.0",
     "loose-envify": "^1.4.0",
-    "terser": "^3.16.1",
+    "terser": "^4.0.0",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
