@@ -13,23 +13,21 @@ const envify = require('loose-envify/custom')
  */
 module.exports = async function(filePath, opts) {
 
-	const env = opts.optimize === true ? { NODE_ENV: 'production' } : {}
+	const envDefault = opts.optimize === true ? { NODE_ENV: 'production' } : {}
 
-	// Use custom options when available or default options as a fallback
-	const babelOpts = typeof opts.babel === 'object' ? opts.babel : {
+	const babelDefaultOpts = {
 		presets: [ '@babel/preset-env', '@babel/preset-react' ],
 		babelrc: false
 	}
 
-	// Use custom options when available or default options as a fallback
-	const browserifyOpts = typeof opts.browserify === 'object' ? opts.browserify : {
+	const browserifyDefaultOpts = {
 		debug: true
 	}
 
-	// Browserify should run envify on all required files
-	const envifyOpts = {
-		global: true
-	}
+	const env = typeof opts.env === 'object' ? opts.env : envDefault
+	const babelOpts = typeof opts.babel === 'object' ? opts.babel : babelDefaultOpts
+	const browserifyOpts = typeof opts.browserify === 'object' ? opts.browserify : browserifyDefaultOpts
+	const envifyOpts = { global: true }
 
 	return new Promise((resolve, reject) => {
 

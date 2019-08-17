@@ -114,6 +114,23 @@ describe('browserify()', function() {
 
 	})
 
+	it('should return JS and replace process.env.TEST when called with a custom environment', async function() {
+
+		const structure = await fsify([
+			{
+				type: fsify.FILE,
+				name: `${ uuid() }.js`,
+				contents: 'const fn = () => process.env.TEST'
+			}
+		])
+
+		const env = { TEST: uuid() }
+		const result = await browserify(structure[0].name, { env })
+
+		assert.include(result, env.TEST)
+
+	})
+
 	it('should return an error when called with an invalid JS file', async function() {
 
 		const structure = await fsify([
