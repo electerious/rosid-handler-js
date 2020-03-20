@@ -1,7 +1,7 @@
 'use strict'
 
 const assert = require('chai').assert
-const uuid = require('uuid/v4')
+const uuid = require('uuid').v4
 const index = require('./../src/index')
 
 // Files must be in cwd so babel can load the plugins and presents
