@@ -35,7 +35,7 @@
     "@babel/preset-react": "^7.8.3",
     "babelify": "^10.0.0",
     "browserify": "^16.5.0",
-    "fsify": "^3.0.0",
+    "fsify": "^4.0.0",
     "loose-envify": "^1.4.0",
     "terser": "^4.0.0",
     "uuid": "^7.0.0"
