@@ -38,7 +38,7 @@
     "fsify": "^4.0.0",
     "loose-envify": "^1.4.0",
     "terser": "^4.0.0",
-    "uuid": "^7.0.0"
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
