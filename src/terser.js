@@ -14,9 +14,7 @@ module.exports = async function(str, opts) {
 	// Skip task when output should not be optimized
 	if (opts.optimize !== true) return str
 
-	const result = terser.minify(str)
-
-	if (result.error != null) throw result.error
+	const result = await terser.minify(str)
 
 	return result.code
 
