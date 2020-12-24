@@ -5,7 +5,7 @@ const babelify = require('babelify')
 const envify = require('loose-envify/custom')
 
 /**
- * Transform JS with Babel and bundle it using Browserify.
+ * Transform and bundle JS.
  * @public
  * @param {String} filePath - Path to the JS file.
  * @param {Object} opts - Options for the task.
